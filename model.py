@@ -55,19 +55,34 @@ class RecordsModel(AbstractModel):
             pickle.dump(self.records, file)
 
     def show_all_records(self):
-        [print("Номер записи:", i, r) for i, r in enumerate(self.records)]
+        return [f"Номер записи: {i} {r}" for i, r in enumerate(self.records)]
 
     def show_record(self, number: int):
-        print("Номер записи:", number, self.records[number])
+        if number <= len(self.records):
+            return f"Номер записи: {number} {self.records[number]}"
+        else:
+            print("Нет записи с таким номером")
 
     def add_record(self, record):
         self.records.append(record)
+
+    def add_record_text(self, title, text):
+        self.records.append(Record(title, text))
 
     def delete_record(self, number: int):
         if number <= len(self.records):
             self.records.pop(number)
         else:
-            return 0
+            print("Нет записи с таким номером")
+
+    def change_record(self, number, title, text):
+        if title != self.records[number].title:
+            self.records[number].title = title
+        if text != self.records[number].body:
+            self.records[number].body = text
+
+    def sort_by_date(self):
+        self.records.sort(key=lambda x: x.time, reverse=True)
 
 
 class AbstractRecord(ABC):
