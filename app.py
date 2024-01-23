@@ -2,7 +2,7 @@
 from model import RecordsModel, Record
 from view import RecordView
 from controller import RecordController
-from datetime import datetime
+
 model = RecordsModel()
 # r1 = Record("1 Запись", 'Первая запись', datetime(2024, 1, 1))
 # r2 = Record("2 Запись", 'Вторая запись', datetime(2024, 1, 2))

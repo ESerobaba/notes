@@ -57,6 +57,9 @@ class RecordsModel(AbstractModel):
     def show_all_records(self):
         return [f"Номер записи: {i} {r}" for i, r in enumerate(self.records)]
 
+    def show_inp_records(self, records):
+        return [f"{r}" for r in self.records]
+
     def show_record(self, number: int):
         if number <= len(self.records):
             return f"Номер записи: {number} {self.records[number]}"
@@ -83,6 +86,16 @@ class RecordsModel(AbstractModel):
 
     def sort_by_date(self):
         self.records.sort(key=lambda x: x.time, reverse=True)
+
+    def filter_records_by_date(self, start_date=None, end_date=None):
+        filtered_records = []
+        for record in self.records:
+            if start_date is not None and record.time < start_date:
+                continue
+            if end_date is not None and record.time > end_date:
+                continue
+            filtered_records.append(record)
+        return filtered_records
 
 
 class AbstractRecord(ABC):

@@ -44,6 +44,16 @@ class RecordController:
     def help(self):
         self.view.get_help()
 
+    def stop(self):
+        self.view.end()
+
+    def filter_data(self):
+        start_date, end_date = self.view.filter_data()
+        if start_date is not None and end_date is not None:
+            filtered_records = self.model.filter_records_by_date(
+                start_date, end_date)
+            print(filtered_records)
+
     def run(self):
         while True:
             self.view.start()
@@ -71,8 +81,7 @@ class RecordController:
                     self.show_all_records()
                 elif command == 'show':
                     self.show_record()
+                elif command == 'filter':
+                    self.filter_data()
                 elif command == 'stop':
                     break
-
-    def stop(self):
-        self.view.end()
