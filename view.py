@@ -1,12 +1,22 @@
 # view.py
 class RecordView:
-    def show_all_records(self, records):
-        print('Все заметки:')
-        [print(rec) for rec in records]
+    command = {'add': "Добавить запись",
+               'delete': "Удалить запись",
+               'show_all': "Показать все записи",
+               'show': "Показать запись",
+               'edit': "Редактировать запись",
+               'sort': "Отсортировать по дате в обратном порядке",
+               'save': "Сохранить в файл",
+               'load': "Загрузить из файла",
+               'stop': "Завершение работы программы",
+               'help': "Помощь"}
 
-    def show_record(self, rec):
+    def show_all_records(self):
+        print('Все заметки:')
+
+    def show_record(self):
         print('Заметка:')
-        print(rec)
+        return int(input())
 
     def add_record(self):
         print('Введите заголовок заметки:')
@@ -15,8 +25,9 @@ class RecordView:
         text = input()
         return title, text
 
-    def remove_record(self):
+    def delete_record(self):
         print('Введите номер заметки которую нужно удалить:')
+        return int(input())
 
     def change_record(self):
         print("Введите новый заголовок заметки:")
@@ -26,10 +37,22 @@ class RecordView:
         return title, text
 
     def get_help(self):
-        command = {'add': "Добавить запись",
-                   'delete': "Удалить запись",
-                   'edit': "Редактировать запись",
-                   'sort': "Отсортировать по дате в обратном порядке",
-                   'save': "Сохранить в файл",
-                   'load': "Загрузить из файла"}
         print('Список команд:')
+        [print(k, v) for k, v in self.command.items()]
+
+    def save(self):
+        print("Введите имя файла для сохранения:")
+        return input()
+
+    def load(self):
+        print("Введите имя файла для загрузки:")
+        return input()
+
+    def start(self):
+        print("Введите команду или help:")
+
+    def end(self):
+        print("Завершение работы программы...")
+
+    def command_error(self):
+        print("Неизвестная комманда")
